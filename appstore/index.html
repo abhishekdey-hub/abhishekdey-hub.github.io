@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhishek App Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Abhishek App Hub</h1>
+        <div class="search-container">
+            <input type="text" id="searchBar" placeholder="Search apps, games, tts..." onkeyup="filterApps()">
+        </div>
+    </header>
+
+    <main class="container">
+        <section>
+            <h2>All Applications</h2>
+            <div id="appGrid" class="app-grid">
+                </div>
+        </section>
+    </main>
+
+    <script src="apps.js"></script>
+</body>
+</html>
