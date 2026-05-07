@@ -1,28 +1,124 @@
-// আপনার অ্যাপ লিস্ট (আগের মতোই)
+/**
+ * Abhishek App Hub - Core Logic
+ * Includes: Search, Voice Search, Dark Mode (Accessible), 
+ * Category Filters, and LocalStorage Persistence.
+ */
+
+// 1. Original App List (Converted to English)
 const allApps = [
-    { name: "Voice Chess Pro", category: "games", desc: "ভয়েস গাইডেড দাবা গেম।", link: "games/chess.html" },
-    { name: "Bangla TTS Premium", category: "tts", desc: "সেরা বাংলা ভয়েস ইঞ্জিন।", link: "tts/bangla-tts.html" }
+    {
+        name: "Voice Chess Pro",
+        category: "games",
+        desc: "A fully voice-guided chess game for everyone.",
+        link: "games/chess.html",
+        isRecent: true
+    },
+    {
+        name: "Bangla TTS Premium",
+        category: "tts",
+        desc: "High-quality Bengali Text-to-Speech engine.",
+        link: "tts/bangla-tts.html",
+        isRecent: true
+    },
+    {
+        name: "Smart Screen Reader",
+        category: "screen-reader",
+        desc: "A fast and accurate screen reader for Android.",
+        link: "screen-readers/smart-reader.html",
+        isRecent: false
+    }
 ];
 
-// ১. ডার্ক মোড টগল
+// 2. Display Apps Function (With Original Card Design)
+function displayApps(appsToDisplay) {
+    const container = document.getElementById('appGrid');
+    if (!container) return; // Guard clause if element doesn't exist on download pages
+    
+    container.innerHTML = '';
+
+    appsToDisplay.forEach(app => {
+        const card = `
+            <div class="app-card" data-category="${app.category}">
+                <h3>${app.name}</h3>
+                <p>${app.desc}</p>
+                <span class="badge">${app.category}</span>
+                <a href="${app.link}" class="btn">Details</a>
+            </div>
+        `;
+        container.innerHTML += card;
+    });
+}
+
+// 3. Search Function (Name & Category Support)
+function filterApps() {
+    const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+    const filtered = allApps.filter(app => 
+        app.name.toLowerCase().includes(searchTerm) || 
+        app.category.toLowerCase().includes(searchTerm)
+    );
+    displayApps(filtered);
+}
+
+// 4. Dark Mode Toggle with Accessibility (ARIA) & LocalStorage
 function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-    const icon = document.querySelector('#darkModeToggle i');
-    if(document.body.classList.contains('dark-mode')) {
+    const body = document.body;
+    const btn = document.getElementById('darkModeToggle');
+    const icon = btn.querySelector('i');
+    
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('darkMode', 'enabled');
         icon.classList.replace('fa-moon', 'fa-sun');
+        btn.setAttribute('aria-label', 'Dark Mode Active. Switch to Light Mode');
     } else {
+        localStorage.setItem('darkMode', 'disabled');
         icon.classList.replace('fa-sun', 'fa-moon');
+        btn.setAttribute('aria-label', 'Light Mode Active. Switch to Dark Mode');
     }
 }
 
-// ২. ক্যাটাগরি মেনু টগল
-function toggleMenu() {
-    document.getElementById("categoryMenu").classList.toggle("show");
+// 5. Initialize Theme on Load (Ensures Dark Mode stays on all pages)
+function initializeTheme() {
+    const darkMode = localStorage.getItem('darkMode');
+    const btn = document.getElementById('darkModeToggle');
+    const icon = btn ? btn.querySelector('i') : null;
+    
+    if (darkMode === 'enabled') {
+        document.body.classList.add('dark-mode');
+        if (icon) icon.classList.replace('fa-moon', 'fa-sun');
+        if (btn) btn.setAttribute('aria-label', 'Dark Mode Active. Switch to Light Mode');
+    } else if (btn) {
+        btn.setAttribute('aria-label', 'Light Mode Active. Switch to Dark Mode');
+    }
 }
 
-// ৩. ভয়েস সার্চ লজিক
+// 6. Category Menu Toggle
+function toggleMenu() {
+    const menu = document.getElementById("categoryMenu");
+    if (menu) menu.classList.toggle("show");
+}
+
+// 7. Category Filter Logic
+function filterByCategory(cat) {
+    toggleMenu(); // Close menu after selection
+    if (cat === 'all') {
+        displayApps(allApps);
+    } else {
+        const filtered = allApps.filter(app => app.category === cat);
+        displayApps(filtered);
+    }
+}
+
+// 8. Voice Search Logic (Web Speech API)
 function startVoiceSearch() {
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        alert("Your browser does not support Voice Search. Please use Chrome.");
+        return;
+    }
+
+    const recognition = new SpeechRecognition();
     recognition.lang = 'en-US'; 
     
     recognition.onstart = () => {
@@ -31,45 +127,33 @@ function startVoiceSearch() {
 
     recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
-        document.getElementById('searchBar').value = transcript;
+        const searchBar = document.getElementById('searchBar');
+        searchBar.value = transcript;
         filterApps();
+        document.getElementById('voiceSearchBtn').style.color = '#333';
+    };
+
+    recognition.onerror = () => {
+        document.getElementById('voiceSearchBtn').style.color = '#333';
+    };
+
+    recognition.onend = () => {
         document.getElementById('voiceSearchBtn').style.color = '#333';
     };
 
     recognition.start();
 }
 
-// ৪. ক্যাটাগরি অনুযায়ী ফিল্টার
-function filterByCategory(cat) {
-    toggleMenu(); // মেনু বন্ধ করার জন্য
-    if(cat === 'all') {
-        displayApps(allApps);
-    } else {
-        const filtered = allApps.filter(app => app.category === cat);
-        displayApps(filtered);
-    }
-}
-
-// ৫. সার্চ এবং ডিসপ্লে ফাংশন (আগের মতোই)
-function displayApps(apps) {
-    const grid = document.getElementById('appGrid');
-    grid.innerHTML = apps.map(app => `
-        <div class="app-card">
-            <h3>${app.name}</h3>
-            <p>${app.desc}</p>
-            <a href="${app.link}" class="request-btn" style="display:block; text-align:center; text-decoration:none;">Details</a>
-        </div>
-    `).join('');
-}
-
-function filterApps() {
-    const term = document.getElementById('searchBar').value.toLowerCase();
-    const filtered = allApps.filter(app => app.name.toLowerCase().includes(term));
-    displayApps(filtered);
-}
-
-window.onload = () => displayApps(allApps);
-
+// 9. Request App Function (Opens Email Client)
 function requestApp() {
-    alert("This feature is coming soon! You can email: abhishekdey913@gmail.com");
+    const email = "abhishekdey913@gmail.com";
+    const subject = encodeURIComponent("App Request - Abhishek App Hub");
+    const body = encodeURIComponent("I would like to request the following app: \n\nApp Name: \nDescription: ");
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
 }
+
+// 10. Run on Page Load
+window.onload = () => {
+    initializeTheme();
+    displayApps(allApps);
+};
