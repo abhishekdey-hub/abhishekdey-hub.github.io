@@ -1,32 +1,46 @@
+/* 1. Color Variables (Theming) */
 :root {
     --bg-color: #f4f4f9;
     --text-color: #333;
     --header-bg: #2c3e50;
     --card-bg: #ffffff;
     --primary-color: #3498db;
+    --badge-bg: #e1e1e1;
+    --shadow: rgba(0,0,0,0.1);
 }
 
-/* ডার্ক মোড কালার */
+/* Dark Mode Colors */
 .dark-mode {
-    --bg-color: #1a1a1a;
+    --bg-color: #121212;
     --text-color: #f4f4f9;
     --header-bg: #000000;
-    --card-bg: #2d2d2d;
+    --card-bg: #1e1e1e;
     --primary-color: #1abc9c;
+    --badge-bg: #444;
+    --shadow: rgba(0,0,0,0.5);
 }
 
+/* 2. Global Styles */
 body {
+    font-family: Arial, Helvetica, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    transition: 0.3s;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
 }
 
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 3. Header & Navigation */
 header {
     background: var(--header-bg);
     color: white;
-    padding: 20px;
+    padding: 30px 20px;
     text-align: center;
 }
 
@@ -34,30 +48,39 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto 20px;
 }
 
-/* বাটন স্টাইল */
+/* Button & Link Styles */
 button {
     cursor: pointer;
     border: none;
     background: none;
     color: white;
-    font-size: 16px;
+    font-size: 18px;
+    transition: opacity 0.2s;
+}
+
+button:hover {
+    opacity: 0.8;
 }
 
 .request-btn {
     background: var(--primary-color);
+    color: white;
     padding: 8px 15px;
     border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
 }
 
-/* সার্চ বক্স ডিজাইন */
+/* 4. Search Bar & Voice Search */
 .search-wrapper {
     position: relative;
     max-width: 500px;
-    margin: 0 auto;
+    margin: 20px auto 0;
 }
 
 #searchBar {
@@ -67,6 +90,9 @@ button {
     border: none;
     font-size: 16px;
     box-sizing: border-box;
+    box-shadow: 0 2px 5px var(--shadow);
+    background-color: #fff;
+    color: #333;
 }
 
 #voiceSearchBtn {
@@ -78,35 +104,104 @@ button {
     font-size: 18px;
 }
 
-/* ড্রপডাউন মেনু */
-.dropdown { position: relative; display: inline-block; }
+/* 5. Category Dropdown Menu */
+.dropdown { 
+    position: relative; 
+    display: inline-block; 
+}
+
+.dropbtn { 
+    font-size: 16px; 
+    font-weight: bold; 
+    color: white;
+}
+
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: var(--card-bg);
-    min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-    z-index: 1;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px var(--shadow);
+    z-index: 10;
     border-radius: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
 }
+
 .dropdown-content a {
     color: var(--text-color);
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    text-align: left;
+    transition: background 0.2s;
 }
-.show { display: block; }
 
-/* অ্যাপ গ্রিড */
+.dropdown-content a:hover { 
+    background-color: var(--primary-color); 
+    color: white; 
+}
+
+.show { 
+    display: block; 
+}
+
+/* 6. Application Grid Layout */
 .app-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
 }
+
+/* 7. App Card Styles */
 .app-card {
     background: var(--card-bg);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px var(--shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+    color: var(--text-color);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.app-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px var(--shadow);
+}
+
+.app-card h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+/* 8. Badges & Call-to-Action Buttons */
+.badge {
+    display: inline-block;
+    background: var(--badge-bg);
+    color: var(--text-color);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn {
+    display: block;
+    text-align: center;
+    background: var(--primary-color);
+    color: white;
+    padding: 12px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background 0.3s, filter 0.2s;
+}
+
+.btn:hover {
+    filter: brightness(1.1);
 }
