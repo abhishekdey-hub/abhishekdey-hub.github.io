@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board Games</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="top-bar">
+            <a href="../../index.html" class="request-btn" aria-label="Go back to store">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+
+            <button id="darkModeToggle" onclick="toggleDarkMode()" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+
+            <button class="request-btn" onclick="requestApp()" aria-label="Request an app">Request</button>
+        </div>
+        <h1>App Details</h1>
+    </header>
+
+    <main class="container">
+        <div class="download-container">
+            <div class="app-header-main">
+                <i class="fas fa-box-open" style="font-size: 50px; color: var(--primary-color);"></i>
+                <h2>Board Games</h2>
+                <span class="badge">Category / Game</span>
+            </div>
+
+            <div class="app-info-table">
+                <p><strong>Version:</strong> 1.0.0</p>
+                <p><strong>Size:</strong> 25 MB</p>
+                <p><strong>Update:</strong> May 2026</p>
+            </div>
+
+            <hr>
+
+            <h3>Select Download Source</h3>
+            
+            <div class="dl-group">
+                                <a href="https://play.google.com/store/apps/details?id=com.labs.ludo" target="_blank" class="dl-link dl-playstore" aria-label="Get it on Google Play Store">
+                    <i class="fab fa-google-play"></i> Get it on Play Store
+                </a>
+
+                            </div>
+
+            <div class="install-guide">
+                <h4><i class="fas fa-info-circle"></i> Quick Guide</h4>
+                <p>1. Download the APK or visit the store link.</p>
+                <p>2. For APKs, allow "Unknown Sources" in settings.</p>
+                <p>3. Install and enjoy the application!</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../assets/js/apps.js"></script>
+</body>
+</html>
