@@ -1,3 +1,7 @@
+---
+title: ""
+---
+
 # Welcome to My Digital Hub 🚀
 
 Hello! I am glad you are here. This is a clean and minimal webpage built entirely using Markdown and hosted on GitHub Pages. 
