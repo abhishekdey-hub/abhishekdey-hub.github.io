@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhishek Hub | Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav aria-label="Main Navigation">
+        <a href="index.html" class="logo">Abhishek Hub</a>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button id="theme-toggle" class="theme-btn" aria-label="Switch to Dark Mode" title="Toggle Dark/Light Mode">
+                <span id="theme-icon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <div class="overlay">
+            <h1 id="greeting-box">Loading...</h1>
+            <div id="clock-box" role="timer" aria-label="Current Time">00:00:00</div>
+            <p id="date-box">Fetching date...</p>
+            <a href="#projects" class="cta-btn">Explore My Work</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="projects" class="services">
+            <div class="container">
+                <h2>Featured Platforms</h2>
+                <p class="section-subtitle">Accessible applications, audio games, and utilities built to empower everyone.</p>
+                
+                <div class="grid">
+                    <article class="service-card">
+                        <div class="card-badge">Android Hub</div>
+                        <h3>App Store</h3>
+                        <p>Visit my personal app hub to explore and download curated, accessible Android applications designed for ease of use.</p>
+                        <a href="accessible-android-appstore/" class="card-btn">Visit Store</a>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="card-badge">Web Directory</div>
+                        <h3>VisionPlay</h3>
+                        <p>A dedicated directory featuring accessible audio games, screen readers, TTS engines, OCR tools, and vision utilities.</p>
+                        <a href="https://abhishekdey-hub.github.io/VisionPlay/" target="_blank" rel="noopener noreferrer" class="card-btn">Explore VisionPlay</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Abhishek Dey | <em>Technology for Everyone</em></p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
