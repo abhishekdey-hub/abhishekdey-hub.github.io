@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Abhishek Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav aria-label="Main Navigation">
+        <a href="index.html" class="logo">Abhishek Hub</a>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
+            </ul>
+            <button id="theme-toggle" class="theme-btn" aria-label="Switch to Dark Mode" title="Toggle Dark/Light Mode">
+                <span id="theme-icon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1>Get In Touch</h1>
+            <p>Have a question, app suggestion, or want to collaborate? Reach out anytime.</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="content-section">
+            <div class="container">
+                <div class="info-card contact-box">
+                    <h2>Direct Email</h2>
+                    <p>Feel free to send an email directly or copy my address below:</p>
+                    
+                    <div class="email-action-group">
+                        <a href="mailto:abhishekdey913@gmail.com" class="email-link" id="email-text">abhishekdey913@gmail.com</a>
+                        <button id="copy-email-btn" class="card-btn" type="button">Copy Email</button>
+                    </div>
+                    <p id="copy-status" class="copy-feedback" aria-live="polite"></p>
+                </div>
+
+                <div class="info-card contact-box">
+                    <h2>GitHub Repositories</h2>
+                    <p>Explore my projects, report issues, or follow my latest updates on GitHub.</p>
+                    <a href="https://github.com/abhishekdey-hub" target="_blank" rel="noopener noreferrer" class="card-btn">Visit GitHub</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Abhishek Dey | <em>Technology for Everyone</em></p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
